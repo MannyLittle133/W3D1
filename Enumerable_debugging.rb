@@ -26,11 +26,35 @@ class Array
 
     end
 
+
+    def my_reject(&blk)
+        self.reject { |ele| blk.call(ele)}
+    end
+
+    def my_any?(&blk)
+        self.any? { |ele| blk.call(ele)}
+    end
+
+    def my_all?(&blk)
+        self.all? { |ele| blk.call(ele)}
+    end
 end
 
+
 a = [1, 2, 3]
-p a.my_select { |num| num > 1 } # => [2, 3]
-p a.my_select { |num| num == 4 } # => []
+p a.my_any? { |num| num > 1 } # => true
+p a.my_any? { |num| num == 4 } # => false
+p a.my_all? { |num| num > 1 } # => false
+p a.my_all? { |num| num < 4 } # => true
+
+# a = [1, 2, 3]
+# p a.my_reject { |num| num > 1 } # => [1]
+# p a.my_reject { |num| num == 4 } # => [1, 2, 3]
+
+
+# a = [1, 2, 3]
+# p a.my_select { |num| num > 1 } # => [2, 3]
+# p a.my_select { |num| num == 4 } # => []
 
 
 # return_value = [1, 2, 3].my_each do |num|
